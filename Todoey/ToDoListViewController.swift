@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Foundation
+import CoreFoundation
 
 class ToDoListViewController: UITableViewController {
 
@@ -14,11 +16,14 @@ class ToDoListViewController: UITableViewController {
     
     let defaults = UserDefaults.standard
     
-    
+    let dataFilePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("items.plist")
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        
+        print(dataFilePath)
         let item = Items()
         item.title = "Raj"
         itemArray.append(item)
@@ -86,7 +91,9 @@ class ToDoListViewController: UITableViewController {
             let newitem = Items()
             newitem.title = alertTextField.text!
             self.itemArray.append(newitem)
-            self.defaults.set(self.itemArray, forKey: "ToDoListObject")
+            NSCoder
+            let endoder = PropertyListEncoder()
+            let data =
             self.tableView.reloadData()
             
         }
